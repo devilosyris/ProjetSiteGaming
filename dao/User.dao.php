@@ -141,12 +141,20 @@ class DaoUser {
             ));
         }
 
-
-
     }
 
-    public function delete($userJoinObject, $userJoinId){
-        DB::select('DELETE FROM ? WHERE id = ?', array( $userJoinObject, $userJoinId));
+    public function delete($userJoinObject, $userJoinId, $itemJoinId){
+        if($userJoinObject == 'game'){
+            DB::select('DELETE FROM user_game WHERE id_game = ? and id_user = ?', array($itemJoinId , $userJoinId));
+        } 
+
+        if($userJoinObject == 'horaire'){
+            DB::select('DELETE FROM user_horaire WHERE id_horaire = ? and id_user = ?', array($itemJoinId , $userJoinId));
+        }
+        
+        if($userJoinObject == 'gameplay'){
+            DB::select('DELETE FROM user_gameplay WHERE id_gameplay = ? and id_user = ?', array($itemJoinId , $userJoinId));
+        }       
     }
 }
 

@@ -7,7 +7,6 @@ class CtrlUser extends Controller {
             $d['user'] = $this->DaoUser->read($_SESSION['id']);
             $this->set($d);
         }
-        
         $this->render('User','index');
     }
 
@@ -64,11 +63,33 @@ class CtrlUser extends Controller {
                 $salt = "2nE@5e!8";
                 $passUser = sha1($this->input['mdp'].$salt);
                 $passBdd = $user->getMdp();
+                // on vérifie que le POST['rememberme'] existe sinon on attribut false a la variable $rememberUser
+                if(isset($_POST['rememberme']))
+                {
+                    $rememberUser = htmlentities($_POST['rememberme']);
+                }
+                else
+                {
+                    $rememberUser = false;
+                }
+
                 // vérification du mdp
                 if($passUser == $passBdd) {
                     
                     $_SESSION['id'] = $user->getId();
                     $_SESSION['pseudo'] = $user->getPseudo();
+                    $_SESSION['statut'] = $user->getStatut();
+                    // si $rememberUser existe et égale à true alors on crée les cookie sinon on les supprimer si il existes
+                    if(isset($rememberUser) AND $rememberUser == true) {
+						setcookie('email',$user->getEmail(),time()+$_SESSION['cookieTime'],$_SESSION['cookiePath'],$_SESSION['cookieDomain'],$_SESSION['httpsOnly'],$_SESSION['httpOnly']);
+						setcookie('mdp',$user->getMdp(),time()+$_SESSION['cookieTime'],$_SESSION['cookiePath'],$_SESSION['cookieDomain'],$_SESSION['httpsOnly'],$_SESSION['httpOnly']);
+					}
+					else
+					{
+						setcookie('email','',time()-3600);
+						setcookie('mdp','',time()-3600);
+                    }
+                    
                     header('Location:'.WEBROOT.'User/monProfil');
                     echo "Bienvenue ".$_SESSION['pseudo']."!";
                 }
@@ -103,21 +124,32 @@ class CtrlUser extends Controller {
             $d['gamesUser'] = $this->DaoUser->readGamesByUser($_SESSION['id']);
             $d['horairesUser'] = $this->DaoUser->readHorairesByUser($_SESSION['id']);
             $d['stylesUser'] = $this->DaoUser->readGameplaysByUser($_SESSION['id']);
+
+            $lastAvatar = $d['user']->getAvatar();
             //envoi des données
             $this->set($d);
 
             if(!empty($this->input)) {
                 $id = $_SESSION['id'];
-                $pseudo = htmlentities($this->input['pseudo']);
-                $email = htmlentities($this->input['email']);
+                $pseudo = htmlspecialchars($this->input['pseudo']);
+                $email = htmlspecialchars($this->input['email']);
                 $dossier = ROOT.'img/avatar/';
-                $fichier = basename($this->files['avatar']['name']);
-                if(move_uploaded_file($this->files['avatar']['tmp_name'],$dossier.$fichier)) {
-                    $avatar = $fichier;
-                }else{
-                    $avatar = null;
+                if(!empty($this->files)){
+                    $fichier = basename($this->files['avatar']['name']);
+                    
+                    if(move_uploaded_file($this->files['avatar']['tmp_name'],$dossier.$fichier)) {
+                        $avatar = $fichier;
+                    }else{
+                        if($lastAvatar){
+                            $avatar = $lastAvatar;
+                        }else{
+                            $avatar = null;
+                        }
+                    }
+                    
                 }
-                $info = htmlentities($this->input['info']);
+                
+                $info = htmlspecialchars($this->input['info']);
                 
                 if(!empty($this->input['game'])) {
                     $game = $this->input['game'];
@@ -154,7 +186,28 @@ class CtrlUser extends Controller {
                 $user = new User($pseudo, $nom, $prenom, $email, $mdp, $info, $avatar, $statut);
                 $userJoin = array('game' => $gameId, 'creneaux' => $horaireId, 'style' => $styleId);
                 $this->DaoUser->update($user, $userJoin, $id);
+
+                // Supprimer les mauvaises jointures
+                foreach($d['gamesUser'] as $game) {
+                    if(!empty($this->input['deleteGame'.$game['id']])){
+                        $this->DaoUser->delete('game', $_SESSION['id'], $game['id']);
+                    }
+                }
+
+                foreach($d['horairesUser'] as $horaire) {
+                    if(!empty($this->input['deleteHoraire'.$horaire['id']])){
+                        $this->DaoUser->delete('horaire', $_SESSION['id'], $horaire['id']);
+                    }
+                }
+
+                foreach($d['stylesUser'] as $style) {
+                    if(!empty($this->input['deleteStyle'.$style['id']])){
+                        $this->DaoUser->delete('gameplay', $_SESSION['id'], $style['id']);
+                    }
+                }
+                
                 header('Location: '.WEBROOT.'User/monProfil');
+                
             }
         
         }
@@ -163,7 +216,32 @@ class CtrlUser extends Controller {
         $this->render('User','monProfil');
     }
 
+    // public function Support() {
+    //     $this->loadDao('User');
+    //     $this->info('Support','Un problème ? N\'hésites pas à contacter notre support.');
+    //     if(!empty($this->input)) {
+    //         if($this->DaoUser->readByEmail($this->input['email']) != null) {
+    //                 $image = null;
+    //                 //creation d'un objet User avec les données reçues du formulaires
+    //                 $support = new Support($sujet, $this->input['pseudo'], $this->input['email'], $description, $image);
+    //                 //ajout de l'objet $newUser à la bdd via le create de la DAO
+    //                 $userSupport = $this->DaoUser->create($support);
+    //                 $d['log'] = 'Votre problème a bien était envoyé !';
+    //         } else {
+    //             $d['log'] = "Email non reconnu, merci de vous inscrire";
+    //             }
+    //         $this->set($d);
+    //         $this->render('User','Support');
+    //     } else {
+    //         $this->render('User','Support');
+    //         $d['log'] = 'Votre formulaire n\'a pas était bien rempli';
+    //     }
+    // }
+
     public function deconnexion() {
+        // On supprime les cookies
+        setcookie('email','',time()-3600,$_SESSION['cookiePath'],$_SESSION['cookieDomain'],$_SESSION['httpsOnly'],$_SESSION['httpOnly']);
+		setcookie('mdp','',time()-3600,$_SESSION['cookiePath'],$_SESSION['cookieDomain'],$_SESSION['httpsOnly'],$_SESSION['httpOnly']);
         // Vide la variable de session
         session_unset();
         // destruction de la variable de session
@@ -175,12 +253,9 @@ class CtrlUser extends Controller {
 
     public function admin() {
         $this->loadDao('User');
-        $d['users'] = $this->DaoUser->readAll();
+        $d['user'] = $this->DaoUser->readAll();
         $this->set($d);
         $this->render('User','admin');
-        if(isset($this->input)) {
-
-        }
     }
 }
 

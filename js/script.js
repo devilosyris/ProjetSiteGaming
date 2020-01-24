@@ -1,7 +1,6 @@
 "use strict";
 
 
-
 //---------- Afficher / Cacher navbar Mobile ----------//
 let imgMenu = document.getElementById("imgMenu");
 let navMobile = document.getElementById("navMobile");
@@ -16,7 +15,9 @@ imgMenu.addEventListener("click", () => {
     }
 });
 
+
 //---------- Afficher / Cacher profil ----------//
+
 let btnEdit = document.getElementById("btnEdit");
 let divProfil = document.getElementById("userProfil");
 let divEdit = document.getElementById("userUpdate");
@@ -31,4 +32,19 @@ btnEdit.addEventListener("click", () => {
     }
 });
 
-//---------- Supprimer un jeu du profil ----------//
+
+//---------- Supprimer les jointures ----------//
+function deleteJoin(id, name)
+{
+     $.ajax({
+        type: "GET",
+        url : "monProfil",
+        data : "id=" + id + "&name=" + name,
+        success: function(){
+            $("#block" + name + id).addClass('d-none');
+            $("#input" + name + id).attr({'name' : 'delete' + name + id});
+        }
+    });
+}
+
+

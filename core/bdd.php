@@ -44,6 +44,24 @@ class DB {
     return self::connect()->lastInsertId();
   }
 
- 
+  //Methode pour les cookies
+  public static function authCheck($email,$mdp)
+  {
+    $request = self::select('SELECT * FROM user WHERE email = ? AND mdp = ?', array($email,$mdp));
+  return $request;
+  }
+
+  public static function getId($email,$mdp)
+  {
+    $request = self::select('SELECT id FROM user WHERE email = ? AND mdp = ?', array($email,$mdp));
+    return $request[0]['id'];
+  }
+
+  public static function getStatut($email,$mdp)
+  {
+    $request = self::select('SELECT statut FROM user WHERE email = ? AND mdp = ?', array($email,$mdp));
+    return $request[0]['statut'];
+  }
+
 }
  ?>

@@ -74,6 +74,17 @@ footer {
 #horodate {
     color: hsl(157, 68%, 67%);
 }
+
+.badge-danger {
+    background-color: hsl(177, 75%, 22%)!important;
+}
+.badge-warning {
+    background-color: hsl(17, 75%, 28%)!important;
+}
+
+.badge-info {
+    background-color: hsl(340, 71%, 28%)!important;
+}
 /* FIN GENERAL */
 
 /* supérieur à tel 768px */
