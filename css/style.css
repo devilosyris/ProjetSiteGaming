@@ -10,28 +10,9 @@ body {
     background-color: rgb(29, 31, 32);
     color: hsl(0, 0%, 90%);
 }
-header input[type="submit"] {
-    background-color: hsl(339, 83%, 16%);
-    color: hsl(0, 0%, 90%);
-    border-radius: 10px;
-    border: solid 2px hsl(339, 44%, 28%);
-    font-weight: bold;
-}
-header button {
-    background-color: hsl(339, 83%, 16%);
-    color: hsl(0, 0%, 90%);
-    border: solid 2px hsl(339, 44%, 28%);
-    font-weight: bold;
-}
 
-header input[type="submit"]:hover {
-    background-color: hsl(339, 70%, 25%);
-    border: solid 2px hsl(339, 44%, 28%);
-}
-
-#banniere {
-    width: 100vw;
-    height: auto;
+header {
+    background-image: linear-gradient(to bottom, rgba(49, 131, 80, 0.5), rgba(78, 44, 16, 0.5)),url("../img/banniere.jpg");    
 }
 
 #titreSlide {
@@ -51,10 +32,9 @@ header input[type="submit"]:hover {
     box-shadow: 0px 1px 10px hsl(17, 51%, 48%);
 }
 footer {
+    background-image: url(../img/footer.png);
     max-width: 100vw;
-}
-#footer_vert{
-    margin-bottom: -4px;
+    margin-top: 20px;
 }
 .separateur {
     width: 100%;
@@ -70,9 +50,17 @@ footer {
     background: rgb(0,0,0);
     background: linear-gradient(180deg, rgba(0,0,0,0.4822128680573792) 0%, rgba(0, 0, 0, 0.37) 50%, rgba(0,0,0,0) 100%); 
     border-top: solid 3px hsl(0, 3%, 38%);
+    margin: 2vw;
 }
 #horodate {
     color: hsl(157, 68%, 67%);
+}
+
+/* PROFIL */
+
+#userProfil > h2 {
+    color: hsl(157, 75%, 40%);
+    text-shadow: 0px 3px 3px hsl(0, 0%, 0%);
 }
 
 .badge-danger {
@@ -93,6 +81,7 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 12vw;
     }
     header input[type="submit"] {
         width: 10vw;
@@ -107,12 +96,9 @@ footer {
         display: flex;
         align-items: center;
         padding-left: 10px;
-    }
-    header #div_login {
-        padding-right: 10px;
-    }
-    #formLogin {
-        display: flex;
+        padding: 10px;
+        background: rgb(255, 255, 255);
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(139, 141, 139, 0.65) 49%, rgba(195, 199, 191, 0.914) 100%); 
     }
     header h1 {
         font-size: 4vw;
@@ -122,24 +108,54 @@ footer {
         width: 30px;
         height: 30px;
     }
+
     
-    #navMobile, #imgMenu {
-        display: none;
+
+    /* LOGIN */
+    #formLogin {
+        display: flex;
+        align-items: center;
+    }
+    #formLogin input[type='email'], input[type='password'] {
+        width: 10vw;
+    }
+    div .custom-control {
+        margin-left: 10px;
+        width: 7vw;
+    }
+    #div_login {
+        padding-right: 10px;
+    }
+
+    #formLogin button {
+        width: 8vw;
+        font-weight: bold;
     }
     
+    /* NAVBAR */
+    nav {
+        height: 5vw;
+    }
+
+    nav a {
+        font-size: 1.5vw;
+    }
+
+    /* MAIN */
     #divWelcome {
         width: 50%;
         margin: auto;
+        padding-top: 20px;
     }
     #textBvn {
-        font-size: 2.5vw;
+        font-size: 2vw;
         color: hsl(157, 75%, 40%);
         text-shadow: 0px 3px 3px hsl(0, 0%, 0%);
         text-align: center;
-        margin-bottom: 80px;
+        margin-bottom: 40px;
     }
     .textPres {
-        font-size: 1.5vw;
+        font-size: 1.4vw;
         text-align: center;
         color: hsl(37, 100%, 94%);
     }
@@ -156,10 +172,14 @@ footer {
         font-size: 2vw;
 
     }
+
+    /* SLIDER PROFIL */
     #titreSlide {
         font-size: 2vw;
         margin-top: 1vw;
     }
+
+    /* SEARCH */
     #divSearch {
         width: 60vw;
         height: auto;
@@ -206,29 +226,91 @@ footer {
         background-color: hsl(78, 100%, 21%);
         box-shadow: 0px 0px 5px hsla(0, 0%, 25%, 0.658);
     }
-    footer p {
+
+    /* FOOTER */
+    footer {
+        height: 18vw;
+    }
+
+    footer h3 {
         font-size: 1.5vw;
-    }
-    #footer_vert {
-        width: 100vw;
-    }
-    .incline {
         transform: rotate(9deg) translateY(120px)
-        translateX(50px);
+        translateX(25px);
+        padding-top: 5px;
     }
+
+    /* ARTICLES */
     .titre_page {
         font-size: 3vw;
+        margin-top: 20px;
     }
     #grid_article {
         display: grid;
-        grid-template-columns: 40vw 40vw;
+        grid-template-columns: 30vw 30vw;
         justify-content: center;
 
     }
     #article img {
-        width: 90%;
-        align-items: center;
+        width: 100%;
     }
+    #article > h3 {
+        margin-top: 15px;
+        font-size: large;
+        color: hsl(157, 68%, 67%);
+    }
+
+    #article > div > p {
+        font-size: 1.3em;
+    }
+
+    /* PROFIL */
+    #userProfil > h2 {
+        font-size: 4em;
+    }
+    #userProfil h3 {
+        font-size: 2.5em;
+    }
+    #userProfil p {
+        font-size: 1.5em;
+        margin-bottom: 30px;
+    }
+
+    /* EDIT PROFIL */
+    #userUpdate form {
+        font-size: 1.3em;
+    }
+    #userUpdate form legend {
+        text-align: center;
+        font-size: 2em;
+    }
+    #userUpdate input {
+        width: 75%;
+    }
+    #userUpdate select {
+        width: 75%;
+    }
+    #userUpdate textarea {
+        width: 75%;
+    }
+
+    /* PANEL ADMIN */
+    table td {
+        max-width: 15vw;
+        margin: 0;
+    }
+    table img {
+        max-width: 5vw;
+        max-height: 5vw;
+    }
+    table a {
+        margin: 5px;
+    }
+    table tr {
+        text-align: center;
+    }
+
+    /* SUPPORT */
+    
 }
 /* FIN > 768px */
 
@@ -244,54 +326,64 @@ footer {
         margin: 0;
     }
     header .logo {
-        width: 5%;
-        height: 5%;
+        width: 7%;
+        height: 7%;
         padding-top: 5px;
         padding-bottom: 5px;
+        
     }
+    header img {
+        height: 40vw;
+    }
+
+    header #div_TL {
+        background: rgb(0,0,0);
+        background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(186,186,186,0.8239496482186625) 50%, rgba(0,0,0,0) 100%);
+    }
+
+    /* LOGIN */
     #formLogin {
-        margin-top: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        width: 70vw;
     }
-    #formLogin input {
-        width: 50%;
+    #formLogin input[type='email'], input[type='password'] {
+        width: 30vw;
+    }
+    
+    div.custom-control, button[type='submit'] {
+        width: 30vw;
+    }
+    #div_login{
         margin: auto;
     }
-    header button {
-        padding: 5px;
-        margin-bottom: 10px;
+
+    #formLogin button {
+        width: 25vw;
+        margin-left: 2.5vw;
+        font-weight: bold;
+    }
+
+    /* NAVBAR */
+    nav {
+        flex-flow: row wrap;
+    }
+    nav > button {
+        margin-bottom: 5px;
         margin-top: 5px;
-        width: 50%;
+        height: 5em;
+        width: 4em;
     }
-    #imgMenu {
-        height: 20vw;
-        position: fixed;
-        bottom: 0;
-    }
-    #navMobile {
-        width: 100%;
-        height: 40vh;
-        background-color: hsla(37, 100%, 94%, 0.938);
-        color: hsla(0, 2%, 10%, 0.993);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-around;
-        position: fixed!important;
-        bottom: 0;
-    }
-    #navMobile a {
-        color: hsl(339, 83%, 16%);
-        text-decoration: none;
-        font-size: 5vw;
-    }
-    #navDesk {
-        display: none;
-    }
+
+    /* MAIN */
     #textBvn {
-        font-size: 7vw;
+        font-size: 5vw;
         color: hsl(157, 75%, 40%);
         text-shadow: 0px 3px 3px hsl(0, 0%, 0%);
         text-align: center;
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
     .textPres {
         font-size: 4vw;
@@ -299,22 +391,26 @@ footer {
         color: hsl(37, 100%, 94%);
     }
     #btnSign {
-        height: 8vh;
-        width: 50%;
+        height: 7vh;
+        width: 40%;
         margin-top: 20px;
-        margin-left: 26%;
+        margin-left: 30%;
     }
     button a {
         text-decoration: none;
         color: hsl(0, 0%, 90%);
         font-weight: bold;
-        font-size: 8vw;
+        font-size: 7vw;
 
     }
+
+    /* SLIDER PROFIL */
     #titreSlide {
         font-size: 7vw;
         margin-top: 10vw;
     }
+
+    /* SEARCH */
     #divSearch {
         width: 100vw;
         height: 60vh;
@@ -356,32 +452,76 @@ footer {
         width: 50%;
         border-radius: 20px;
     }
-    footer p {
+
+    /* FOOTER */
+    footer {
+        height: 20vh;
+        margin-top: 30px;
+    }
+    footer h3 {
         font-size: 4.2vw;
     }
-    #footer_vert {
-        width: 250%;
-        height: 20vh;
-    }
     .incline {
-        transform: rotate(9deg) translateY(40px)
-        translateX(50px);
+        transform: rotate(9deg) translateY(30px)
+        translateX(10px);
     }
+
+    /* ARTICLE */
     .titre_page {
-        font-size: 6vw;
+        font-size: 8vw;
+        font-weight: bold;
+        margin: 10px;
     }
     #article {
-        width: 70%;
+        width: 85%;
         margin: auto;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
+        margin-top: 20px;
         font-size: 4vw;
     }
     #article h3 {
-        font-size: 4.5vw;
+        font-size: 5.5vw;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        color: hsl(157, 68%, 67%);
     }
     #article img {
-        width: 70vw;
+        width: 100%;
+    }
+
+    /* PROFIL */
+
+    #userProfil > h2 {
+        font-size: 3em;
+    }
+    #userProfil h3 {
+        font-size: 2em;
+        text-align: center;
+    }
+
+    #userProfil p {
+        font-size: 1.3em;
+        margin-bottom: 20px;
+    }
+    #userProfil img {
+        height: 35vh;
+    }
+    #divImgProfil {
+        order: -1;
+    }
+
+    #btnEdit {
+        height: 5vh;
+        font-size: 1.5em;
+    }
+
+    /* EDIT PROFIL */
+    #userUpdate {
+        width: 100%;
         margin: auto;
+    }
+    #userUpdate form legend {
+        text-align: center;
     }
 
 }

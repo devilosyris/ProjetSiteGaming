@@ -68,7 +68,7 @@
                                             </legend>
                                         </p>
                                     </div>
-                                    <div class="col-12 col-md-3 col-sm-2">
+                                    <div id="divImgProfil" class="col-12 col-md-3 col-sm-2">
                                         <img src="<?= WEBROOT.'img/avatar/'.htmlentities($user->getAvatar(), ENT_QUOTES) ?>" alt="" class="mx-auto rounded-circle img-fluid d-block py-5">
                                     </div>
                                     <div class="col-12 col-lg-3">
@@ -97,7 +97,7 @@
     <!-- End profil -->
 
     <!-- Update profil form -->
-    <div class="col-5">
+    <div class="col 12 col-lg-5 col-md-5">
         <div id="userUpdate" class="row justify-content-center">
             <div class="col-12">
                 <form method="POST" action="<?= WEBROOT ?>User/monProfil" enctype="multipart/form-data">

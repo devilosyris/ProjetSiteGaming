@@ -257,6 +257,10 @@ class CtrlUser extends Controller {
         $this->set($d);
         $this->render('User','admin');
     }
+
+    public function support() {
+        $this->render('User','support');
+    }
 }
 
 ?>

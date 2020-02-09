@@ -1,7 +1,6 @@
 
 <!-- Si pas de membres connecté -->
 <?php if (!isset($_SESSION['id'])) { ?>
-    <img class="separateur" src="<?= WEBROOT ?>././img/separateur.png" alt="separation">
     <div id="divWelcome">
         <p id="textBvn"> Bienvenue sur le site qui te permettra de trouver les partenaires de jeu idéal !</p>
         <p class="textPres">La section de recherche t'aidera à choisir un profil en fonction des critères qui te corresponde au mieux ..</p>

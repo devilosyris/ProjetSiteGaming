@@ -30,18 +30,18 @@ if(isset($_SESSION['id']) AND $_SESSION['statut'] == 1) {
       <td><?= htmlentities($member->getInfo(), ENT_QUOTES) ?></td>
       <td>
         <div class="container-fluid">
-            <img src="<?= WEBROOT.'img/avatar/'.htmlentities($member->getAvatar(), ENT_QUOTES) ?>" alt="" class="mx-auto rounded-circle img-fluid d-block py-5">
+            <img src="<?= WEBROOT.'img/avatar/'.htmlentities($member->getAvatar(), ENT_QUOTES) ?>" alt="" class="mx-auto rounded-circle img-fluid d-block">
         </div>
       </td>
       <td>
       <span>
         <a class="text-info" href="">
-            <i class="fas fa-edit"></i>
+            <i class="fas fa-edit fa-2x"></i>
         </a>
       </span>
       <span>
         <a class="text-danger" href="">
-          <i class="fas fa-trash"></i>
+          <i class="fas fa-trash fa-2x"></i>
         </a>
       </span>
       </td>

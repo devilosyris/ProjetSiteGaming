@@ -23,42 +23,23 @@
 <body>
     <div class="container-fluid p-0">
         <header>
+            <img class="logoSite" src="<?= WEBROOT ?>img/logo.png" alt="logo du site">
+            
             <div id="div_TL">
-            <h1>Gaming mate</h1>
-            <img class="logo" src="<?= WEBROOT ?>img/twitter-picto.png" alt="twitter">
-            <img class="logo" src="<?= WEBROOT ?>img/facebook_logo.png" alt="facebook">
+            <img class="logo" src="<?= WEBROOT ?>img/twitter-picto.png" alt="logo twitter">
+            <img class="logo" src="<?= WEBROOT ?>img/facebook_logo.png" alt="logo facebook">
             </div>
-
-            <div id="div_login">
-            <?php if (isset($_SESSION['id'])) {
-                echo '<a href="'.WEBROOT.'User/deconnexion"><button>Déconnexion</button></a>';
-            } else { ?>
-                <form id="formLogin" action="<?= WEBROOT ?>User/connexion" method="POST">
-                    <input type="email" name="email" class="form-control" placeholder="Entrez votre email">
-                    <input type="password" name="mdp" class="form-control" placeholder="Entrez votre mot de passe">
-                    <div class="custom-control custom-checkbox my-1 mr-sm-2">
-                        <input type="checkbox" name="rememberme" class="custom-control-input" id="customControlInline">
-                        <label class="custom-control-label" for="customControlInline">Se souvenir de moi</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Connexion</button>
-                </form>
-            <?php } ?>
-            </div>
-            
-            
         </header>
-        <img id="banniere" src="<?= WEBROOT ?>img/banniere.jpg" alt="bannière">
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top d-sm-flex d-none" id="navDesk">
-            <a class="navbar-brand" href="#">Navbar</a>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarColor02">
                 <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="<?= WEBROOT ?>User/index">Accueil <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= WEBROOT ?>User/index">Accueil<span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item">
                     <a  class="nav-link"href="<?= WEBROOT ?>#divSearch">Recherche</a>
@@ -76,18 +57,28 @@
                 </li>
                 </ul>
             </div>
-        </nav>
 
-
-        <img id="imgMenu" src="<?= WEBROOT ?>img/menu.png" alt="menu">
-        <nav id="navMobile">
-            <a href="<?= WEBROOT ?>User/index">Accueil</a>
-            <a href="<?= WEBROOT ?>#divSearch">Recherche</a>
-            <a href="<?= WEBROOT ?>Article/index">Actualités</a>
-            <?php if (isset($_SESSION['id'])) { ?>
-            <a href="<?= WEBROOT ?>User/monProfil">Mon Profil</a>
-            <?php } ?>
-            <a href="<?= WEBROOT ?>User/support">Support</a>
+            <div id="div_login">
+            <?php
+                if(isset($_SESSION['id'])){
+                    if(isset($_SESSION['statut']) == 1) {
+                        ?>
+                            <a href="<?= WEBROOT ?>User/admin"><button class="btn btn-primary">Panel administrateur</button></a>
+                        <?php
+                    }
+                    echo '<a href="'.WEBROOT.'User/deconnexion"><button class="btn btn-danger">Déconnexion</button></a>';
+                } else { ?>
+                    <form id="formLogin" action="<?= WEBROOT ?>User/connexion" method="POST">
+                        <input type="email" name="email" class="form-control" placeholder="Entrez votre email">
+                        <input type="password" name="mdp" class="form-control" placeholder="Entrez votre mot de passe">
+                        <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                            <input type="checkbox" name="rememberme" class="custom-control-input" id="customControlInline">
+                            <label class="custom-control-label" for="customControlInline">Se souvenir de moi</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Connexion</button>
+                    </form>
+                <?php } ?>
+            </div>
         </nav>
         <?php 
         
@@ -165,22 +156,9 @@
             
         ?>
         <footer>
-            <p class="incline">Nos partenaires</p>
-            <?php
-                if(isset($_SESSION['id'])){
-                    if(isset($_SESSION['statut']) == 1) {
-                        ?>
-                            <a href="<?= WEBROOT ?>User/admin">Panel administrateur</a>
-                        <?php
-                    }
-                }
-            ?>
-            <img id="footer_vert" src="<?= WEBROOT ?>img/footer.png" alt="footer vert">
-            
+            <h3 class="incline">Nos partenaires</h3>
         </footer>
     </div>
-    
-    
     
     <script src="<?= WEBROOT ?>js/script.js"></script>
     
@@ -190,7 +168,8 @@
     <!-- changement de l'url en fonction de la page choisi -->
 	<script>
         let url = "<?php echo $_SESSION['url']?>";
-        //window.onload = changeUrl(url);
+        window.onload = changeUrl(url);
+        
     </script>
 </body>
 </html>
