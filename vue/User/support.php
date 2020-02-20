@@ -1,5 +1,6 @@
-<div class="row justify-content-center mt-5">
-    <form action="<?= WEBROOT ?>User/support" method="POST">
+<div id="divSupp" class="justify-content-center mt-5">
+    <p class="textSupp">Un problème avec un utilisateur ? Votre compte ? ou autres… Vous êtes au bon endroit !</p>
+    <form id="formSupp" action="<?= WEBROOT ?>User/support" method="POST">
         <fieldset>
             <legend>Un problème ? Contactez notre support</legend>
             <div class="form-group">
@@ -7,8 +8,8 @@
                 <input type="text" name="sujet" class="form-control" id="inputSujet" placeholder="Entrez le sujet du problème">
             </div>
             <div class="form-group">
-                <label for="inputDescription">Description du problème</label>
-                <textarea name="description" id="inputDescription" cols="30" rows="10"></textarea>
+                
+                <textarea name="description" id="inputDescription" rows="5" placeholder="Description du problème..."></textarea>
             </div>
             <div class="form-group">
                 <label for="inputPseudo">Votre pseudo</label>
@@ -28,4 +29,5 @@
             </fieldset>
         </fieldset>
     </form>
+    <p class="textSupp">Notre équipe fera au mieux pour vous aider et vous répondre dans les plus bref délais</p>
 </div>

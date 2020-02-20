@@ -21,7 +21,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-    <div class="container-fluid p-0">
+    <div class="container-fluid p-0 m-0">
         <header>
             <img class="logoSite" src="<?= WEBROOT ?>img/logo.png" alt="logo du site">
             
@@ -161,6 +161,7 @@
     </div>
     
     <script src="<?= WEBROOT ?>js/script.js"></script>
+    <script src="<?= WEBROOT ?>js/info.js"></script>
     
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
